@@ -1,0 +1,11 @@
+WITH cte AS (
+    SELECT advertising_channel,
+           MAX(money_spent) AS max_yearly_spend
+    FROM uber_advertising
+    GROUP BY advertising_channel
+    HAVING MIN(customers_acquired) > 1500
+)
+SELECT advertising_channel
+FROM cte
+ORDER BY max_yearly_spend
+LIMIT 1;
